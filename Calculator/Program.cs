@@ -1,8 +1,9 @@
 ﻿
 // Limpando o console
 
-Soma();
-Subtracao();
+//Soma();
+//Subtracao();
+Divisao();
 
 static void Soma()
 {
@@ -21,12 +22,12 @@ static void Soma()
     float resultado = v1 + v2;
 
     Console.WriteLine($"O resultado da soma é: {resultado}");
+    Console.ReadKey();
 }
 
 static void Subtracao()
 {
     Console.Clear();
-
     Console.WriteLine("Primeiro valor:");
 
     // Convertendo o valor que vem do ReadLine para float 
@@ -40,6 +41,32 @@ static void Subtracao()
     float resultado = v1 - v2;
 
     Console.WriteLine($"O resultado da subtracao é: {resultado}");
+    Console.ReadKey();
 }
 
+static void Divisao()
+{
+    Console.Clear();
+
+    float v1, v2;
+
+    Console.WriteLine("Digite o primeiro valor: ");
+    v1 = float.Parse(Console.ReadLine());
+
+    if (v1 <= 0)
+    {
+        Console.WriteLine("Digite um valor maior que 0");
+        v1 = float.Parse(Console.ReadLine());
+    }
+
+    Console.WriteLine("Digite o segundo valor: ");
+    v2 = float.Parse(Console.ReadLine());
+
+    float divisao = v1 / v2;
+
+    Console.WriteLine("");
+
+    Console.WriteLine($"O resultado da divisão é {divisao} ");
+
+}
 
