@@ -40,7 +40,7 @@ namespace EntradaNF
         private void button2_Click(object sender, EventArgs e)
         {
             SqlConnection cn = new SqlConnection(Conn.StrCon);
-            var sqlQuery = "SELECT * FROM NFENTRADA2";
+            var sqlQuery = "SELECT * FROM TabEntradaNF";
             using (SqlDataAdapter da = new SqlDataAdapter(sqlQuery, cn))
             {
                 using (DataTable dt = new DataTable())
@@ -81,35 +81,35 @@ namespace EntradaNF
                     case "PORTEIRO":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery = "SELECT * FROM NFENTRADA2 WHERE PORTEIRO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery = "SELECT * FROM TabEntradaNF WHERE PORTEIRO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
                         }
                         else
                         {
-                            sqlQuery = "SELECT * FROM NFENTRADA2 WHERE PORTEIRO LIKE '%" + txtBuscar.Text + "%'  Order by id";
+                            sqlQuery = "SELECT * FROM TabEntradaNF WHERE PORTEIRO LIKE '%" + txtBuscar.Text + "%'  Order by id";
                         }
                         break;
 
                     case "MOTORISTA":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE MOTORISTA LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000'  Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE MOTORISTA LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000'  Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE MOTORISTA LIKE '%" + txtBuscar.Text + "%'  Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE MOTORISTA LIKE '%" + txtBuscar.Text + "%'  Order by id";
                         }
                         break;
 
                     case "RG":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE RG LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE RG LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE RG LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE RG LIKE '%" + txtBuscar.Text + "%' Order by id";
 
                         }
                         break;
@@ -117,12 +117,12 @@ namespace EntradaNF
                     case "PLACA":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE PLACA LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE PLACA LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE PLACA LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE PLACA LIKE '%" + txtBuscar.Text + "%' Order by id";
 
                         }
                         break;
@@ -130,12 +130,12 @@ namespace EntradaNF
                     case "MOTIVO":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' Order by id";
 
                         }
                         break;
@@ -143,12 +143,12 @@ namespace EntradaNF
                     case "DESTINO":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE DESTINO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE DESTINO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE DESTINO LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE DESTINO LIKE '%" + txtBuscar.Text + "%' Order by id";
 
                         }
                         break;
@@ -156,24 +156,24 @@ namespace EntradaNF
                     case "EMPRESA":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM NFENTabEntradaNFTRADA2 WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE MOTIVO LIKE '%" + txtBuscar.Text + "%' Order by id";
                         }
                         break;
 
                     case "OBSERVACAO":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE OBSERVACAO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE OBSERVACAO LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE OBSERVACAO LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE OBSERVACAO LIKE '%" + txtBuscar.Text + "%' Order by id";
 
                         }
                         break;
@@ -181,12 +181,12 @@ namespace EntradaNF
                     case "NF":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE NF LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE NF LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE NF LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE NF LIKE '%" + txtBuscar.Text + "%' Order by id";
 
                         }
                         break;
@@ -194,12 +194,24 @@ namespace EntradaNF
                     case "VALOR_NF":
                         if (chkSemSaida.Checked == true)
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE VALOR_NF LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE VALOR_NF LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
 
                         }
                         else
                         {
-                            sqlQuery += " SELECT * FROM NFENTRADA2 WHERE VALOR_NF LIKE '%" + txtBuscar.Text + "%' Order by id";
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE VALOR_NF LIKE '%" + txtBuscar.Text + "%' Order by id";
+                        }
+                        break;
+
+                    case "CNPJ":
+                        if (chkSemSaida.Checked == true)
+                        {
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE CNPJ LIKE '%" + txtBuscar.Text + "%' AND SAIDA =  '2022-01-01 00:00:00.000' Order by id";
+
+                        }
+                        else
+                        {
+                            sqlQuery += " SELECT * FROM TabEntradaNF WHERE CNPJ LIKE '%" + txtBuscar.Text + "%' Order by id";
                         }
                         break;
                 }
@@ -221,13 +233,13 @@ namespace EntradaNF
 
                 if (chkSemSaida.Checked == true)
                 {
-                    sqlQuery = "SELECT  * FROM NFENTRADA2 WHERE SAIDA = '2022-01-01 00:00:00.000'";
+                    sqlQuery = "SELECT  * FROM TabEntradaNF WHERE SAIDA = '2022-01-01 00:00:00.000'";
 
 
                 }
                 else
                 {
-                    sqlQuery = "SELECT * FROM NFENTRADA2";
+                    sqlQuery = "SELECT * FROM TabEntradaNF";
 
                 }
 
@@ -247,13 +259,13 @@ namespace EntradaNF
 
                 if (chkSemSaida.Checked == true)
                 {
-                    sqlQuery = "SELECT  * FROM NFENTRADA2 WHERE SAIDA = '2022-01-01 00:00:00.000'";
+                    sqlQuery = "SELECT  * FROM TabEntradaNF WHERE SAIDA = '2022-01-01 00:00:00.000'";
 
 
                 }
                 else
                 {
-                    sqlQuery = "SELECT * FROM NFENTRADA2";
+                    sqlQuery = "SELECT * FROM TabEntradaNF";
 
                 }
 

@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textTransportadora = new System.Windows.Forms.TextBox();
+            this.chkLastEntry = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textDestino = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -58,15 +61,17 @@
             this.textMotorista = new System.Windows.Forms.TextBox();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.lbEmpresa = new System.Windows.Forms.Label();
-            this.textPorteiro = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
-            this.chkLastEntry = new System.Windows.Forms.CheckBox();
+            this.cboxPorteiro = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.panel1.Controls.Add(this.cboxPorteiro);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.textTransportadora);
             this.panel1.Controls.Add(this.chkLastEntry);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.textDestino);
@@ -96,7 +101,6 @@
             this.panel1.Controls.Add(this.textMotorista);
             this.panel1.Controls.Add(this.btnSalvar);
             this.panel1.Controls.Add(this.lbEmpresa);
-            this.panel1.Controls.Add(this.textPorteiro);
             this.panel1.Controls.Add(this.lbNome);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -104,10 +108,37 @@
             this.panel1.Size = new System.Drawing.Size(800, 450);
             this.panel1.TabIndex = 29;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(426, 46);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(77, 13);
+            this.label13.TabIndex = 63;
+            this.label13.Text = "Tranportadora:";
+            // 
+            // textTransportadora
+            // 
+            this.textTransportadora.Location = new System.Drawing.Point(509, 43);
+            this.textTransportadora.Name = "textTransportadora";
+            this.textTransportadora.Size = new System.Drawing.Size(159, 20);
+            this.textTransportadora.TabIndex = 64;
+            // 
+            // chkLastEntry
+            // 
+            this.chkLastEntry.AutoSize = true;
+            this.chkLastEntry.Location = new System.Drawing.Point(12, 12);
+            this.chkLastEntry.Name = "chkLastEntry";
+            this.chkLastEntry.Size = new System.Drawing.Size(143, 17);
+            this.chkLastEntry.TabIndex = 62;
+            this.chkLastEntry.Text = "Buscar da última entrada";
+            this.chkLastEntry.UseVisualStyleBackColor = true;
+            this.chkLastEntry.CheckedChanged += new System.EventHandler(this.chkLastEntry_CheckedChanged);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(438, 70);
+            this.label5.Location = new System.Drawing.Point(457, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 61;
@@ -115,7 +146,7 @@
             // 
             // textDestino
             // 
-            this.textDestino.Location = new System.Drawing.Point(490, 70);
+            this.textDestino.Location = new System.Drawing.Point(509, 95);
             this.textDestino.Name = "textDestino";
             this.textDestino.Size = new System.Drawing.Size(159, 20);
             this.textDestino.TabIndex = 60;
@@ -175,6 +206,7 @@
             this.dtNF.Name = "dtNF";
             this.dtNF.Size = new System.Drawing.Size(159, 20);
             this.dtNF.TabIndex = 43;
+            this.dtNF.Value = new System.DateTime(1999, 1, 1, 0, 0, 0, 0);
             // 
             // label10
             // 
@@ -204,7 +236,7 @@
             // 
             // textObs
             // 
-            this.textObs.Location = new System.Drawing.Point(490, 148);
+            this.textObs.Location = new System.Drawing.Point(509, 173);
             this.textObs.Name = "textObs";
             this.textObs.Size = new System.Drawing.Size(159, 20);
             this.textObs.TabIndex = 42;
@@ -212,7 +244,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(416, 148);
+            this.label8.Location = new System.Drawing.Point(435, 173);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 13);
             this.label8.TabIndex = 52;
@@ -238,7 +270,7 @@
             // 
             this.dtSaida.CustomFormat = "yyyy-MM-dd  HH:mm";
             this.dtSaida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtSaida.Location = new System.Drawing.Point(490, 122);
+            this.dtSaida.Location = new System.Drawing.Point(509, 147);
             this.dtSaida.Name = "dtSaida";
             this.dtSaida.Size = new System.Drawing.Size(159, 20);
             this.dtSaida.TabIndex = 40;
@@ -247,7 +279,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(447, 125);
+            this.label6.Location = new System.Drawing.Point(466, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 50;
@@ -256,7 +288,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(442, 99);
+            this.label4.Location = new System.Drawing.Point(461, 124);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 47;
@@ -264,7 +296,7 @@
             // 
             // textMotivo
             // 
-            this.textMotivo.Location = new System.Drawing.Point(490, 96);
+            this.textMotivo.Location = new System.Drawing.Point(509, 121);
             this.textMotivo.Name = "textMotivo";
             this.textMotivo.Size = new System.Drawing.Size(159, 20);
             this.textMotivo.TabIndex = 39;
@@ -340,18 +372,11 @@
             // lbEmpresa
             // 
             this.lbEmpresa.AutoSize = true;
-            this.lbEmpresa.Location = new System.Drawing.Point(438, 47);
+            this.lbEmpresa.Location = new System.Drawing.Point(457, 72);
             this.lbEmpresa.Name = "lbEmpresa";
             this.lbEmpresa.Size = new System.Drawing.Size(46, 13);
             this.lbEmpresa.TabIndex = 33;
             this.lbEmpresa.Text = "Porteiro:";
-            // 
-            // textPorteiro
-            // 
-            this.textPorteiro.Location = new System.Drawing.Point(490, 44);
-            this.textPorteiro.Name = "textPorteiro";
-            this.textPorteiro.Size = new System.Drawing.Size(159, 20);
-            this.textPorteiro.TabIndex = 37;
             // 
             // lbNome
             // 
@@ -362,16 +387,13 @@
             this.lbNome.TabIndex = 29;
             this.lbNome.Text = "Entrada:";
             // 
-            // chkLastEntry
+            // cboxPorteiro
             // 
-            this.chkLastEntry.AutoSize = true;
-            this.chkLastEntry.Location = new System.Drawing.Point(12, 12);
-            this.chkLastEntry.Name = "chkLastEntry";
-            this.chkLastEntry.Size = new System.Drawing.Size(143, 17);
-            this.chkLastEntry.TabIndex = 62;
-            this.chkLastEntry.Text = "Buscar da última entrada";
-            this.chkLastEntry.UseVisualStyleBackColor = true;
-            this.chkLastEntry.CheckedChanged += new System.EventHandler(this.chkLastEntry_CheckedChanged);
+            this.cboxPorteiro.FormattingEnabled = true;
+            this.cboxPorteiro.Location = new System.Drawing.Point(509, 69);
+            this.cboxPorteiro.Name = "cboxPorteiro";
+            this.cboxPorteiro.Size = new System.Drawing.Size(159, 21);
+            this.cboxPorteiro.TabIndex = 65;
             // 
             // Form2
             // 
@@ -416,12 +438,14 @@
         private System.Windows.Forms.TextBox textMotorista;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Label lbEmpresa;
-        private System.Windows.Forms.TextBox textPorteiro;
         private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textCnpj;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textDestino;
         private System.Windows.Forms.CheckBox chkLastEntry;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textTransportadora;
+        private System.Windows.Forms.ComboBox cboxPorteiro;
     }
 }

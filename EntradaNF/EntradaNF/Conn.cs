@@ -8,10 +8,10 @@ namespace EntradaNF
 {
     internal class Conn
     {
-        private static string server = @"DESKTOP-8GOC3GU\SQLEXPRESS";
-        private static string dataBase = "Teste";
-        private static string user = "sa";
-        private static string password = "teste123";
+        private static string server = @"EDB01";
+        private static string dataBase = "Emphasis";
+        private static string user = "usrReport";
+        private static string password = "3j34ns@Psql18";
 
         public static string StrCon
         {

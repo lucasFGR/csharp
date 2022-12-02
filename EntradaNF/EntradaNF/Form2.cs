@@ -16,11 +16,11 @@ namespace EntradaNF
     {
         int id = 0;
 
-        public Form2( int id)
+        public Form2(int id)
         {
             InitializeComponent();
+            getPorteiro();
             dtEntrada.Value = System.DateTime.Now;
-
 
 
             this.id = id;
@@ -29,22 +29,38 @@ namespace EntradaNF
             {
                 GetEntrada(id);
                 chkLastEntry.Visible = false;
-
+                dtEntrada.Enabled = false;
+                textEmpresa.Enabled = false;
+                textMotorista.Enabled = false;
+                textPlaca.Enabled = false;
+                textDestino.Enabled = false;
+                cboxPorteiro.Enabled = false;
+                textRG.Enabled = false;
+                textMotivo.Enabled = false;
+                textObs.Enabled = false;
+                dtNF.Enabled = false;
+                Nf.Enabled = false;
+                valNF.Enabled = false;
+                textTransportadora.Enabled = false;
+                textCnpj.Enabled = false;
+                ckNf.Enabled = false;
             }
 
 
         }
 
+        
+
 
         private void GetEntrada(int id)
         {
-            
+
             try
             {
                 using (SqlConnection cn = new SqlConnection(Conn.StrCon))
                 {
                     cn.Open();
-                    var sql = "SELECT * FROM NFENTRADA2 WHERE id =" + id;
+                    var sql = "SELECT * FROM TabEntradaNF WHERE id =" + id;
                     using (SqlCommand cmd = new SqlCommand(sql, cn))
                     {
                         using (SqlDataReader dr = cmd.ExecuteReader())
@@ -59,7 +75,7 @@ namespace EntradaNF
                                     textMotorista.Text = dr["MOTORISTA"].ToString();
                                     textPlaca.Text = dr["PLACA"].ToString();
                                     textDestino.Text = dr["DESTINO"].ToString();
-                                    textPorteiro.Text = dr["PORTEIRO"].ToString();
+                                    cboxPorteiro.Text = dr["PORTEIRO"].ToString();
                                     textRG.Text = dr["RG"].ToString();
                                     textMotivo.Text = dr["MOTIVO"].ToString();
                                     dtSaida.Value = Convert.ToDateTime(dr["SAIDA"]);
@@ -67,13 +83,16 @@ namespace EntradaNF
                                     dtNF.Value = Convert.ToDateTime(dr["DATA_EMISSAO"]);
                                     Nf.Text = dr["NF"].ToString();
                                     valNF.Text = dr["VALOR_NF"].ToString();
+                                    textTransportadora.Text = dr["TRANSPORTADORA"].ToString();
+                                    textCnpj.Text = dr["CNPJ"].ToString();
 
                                 }
                             }
                         }
                     }
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Falha ao abrir registro" + ex.Message);
             }
@@ -81,7 +100,7 @@ namespace EntradaNF
 
         private void seachEmpresa()
         {
-            
+
         }
         private void btnSalvar_Click_1(object sender, EventArgs e)
         {
@@ -97,23 +116,22 @@ namespace EntradaNF
 
 
                 if (this.id == 0)
-                    sql = "INSERT INTO NFENTRADA2 VALUES (@ENTRADA,@PORTEIRO,@MOTORISTA,@RG,@PLACA,@MOTIVO,@DESTINO,@SAIDA,@EMPRESA,@OBSERVACAO,@NF,@DATA_EMISSAO,@VALOR_NF)";
+                    sql = "INSERT INTO TabEntradaNF VALUES (@ENTRADA,@PORTEIRO,@MOTORISTA,@RG,@PLACA,@MOTIVO,@DESTINO,@SAIDA,@CNPJ,@EMPRESA,@OBSERVACAO,@NF,@DATA_EMISSAO,@VALOR_NF,@TRANSPORTADORA)";
                 else
                 {
-                    sql = "UPDATE NFENTRADA2 SET ENTRADA=@ENTRADA,PORTEIRO=@PORTEIRO,MOTORISTA=@MOTORISTA,RG=@RG,PLACA=@PLACA,MOTIVO=@MOTIVO,DESTINO=@DESTINO,SAIDA=@SAIDA,EMPRESA=@EMPRESA,OBSERVACAO=@OBSERVACAO,NF=@NF,DATA_EMISSAO=@DATA_EMISSAO,VALOR_NF=@VALOR_NF  WHERE id=" + this.id;
+                    sql = "UPDATE TabEntradaNF SET ENTRADA=@ENTRADA,PORTEIRO=@PORTEIRO,MOTORISTA=@MOTORISTA,RG=@RG,PLACA=@PLACA,MOTIVO=@MOTIVO,DESTINO=@DESTINO,SAIDA=@SAIDA,CNPJ=@CNPJ,EMPRESA=@EMPRESA,OBSERVACAO=@OBSERVACAO,NF=@NF,DATA_EMISSAO=@DATA_EMISSAO,VALOR_NF=@VALOR_NF,TRANSPORTADORA=@TRANSPORTADORA  WHERE id=" + this.id;
                 }
 
                 using (SqlCommand cmd = new SqlCommand(sql, cn))
                 {
-                    
-                    //cmd.Parameters.AddWithValue("@nome", dtEntrada.Text);
+
                     cmd.Parameters.AddWithValue("ENTRADA", Convert.ToDateTime(dtEntrada.Value));
-                    cmd.Parameters.AddWithValue("PORTEIRO", textPorteiro.Text);
-                    cmd.Parameters.AddWithValue("MOTORISTA", textMotorista.Text);
-                    cmd.Parameters.AddWithValue("RG", textRG.Text);
-                    cmd.Parameters.AddWithValue("PLACA", textPlaca.Text);
-                    cmd.Parameters.AddWithValue("MOTIVO", textMotivo.Text);
-                    cmd.Parameters.AddWithValue("DESTINO", textDestino.Text);
+                    cmd.Parameters.AddWithValue("PORTEIRO", cboxPorteiro.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("MOTORISTA", textMotorista.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("RG", textRG.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("PLACA", textPlaca.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("MOTIVO", textMotivo.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("DESTINO", textDestino.Text.ToUpper());
 
                     if (dtSaida.Value.ToString() == "01/01/2022")
                     {
@@ -123,12 +141,13 @@ namespace EntradaNF
                     {
                         cmd.Parameters.AddWithValue("SAIDA", Convert.ToDateTime(dtSaida.Value));
                     }
-
-                    cmd.Parameters.AddWithValue("EMPRESA", textEmpresa.Text);
-                    cmd.Parameters.AddWithValue("OBSERVACAO", textObs.Text);
-                    cmd.Parameters.AddWithValue("NF", Nf.Text);
-                    cmd.Parameters.AddWithValue("DATA_EMISSAO", Convert.ToDateTime( dtNF.Text));
-                    cmd.Parameters.AddWithValue("VALOR_NF", valNF.Text);
+                    cmd.Parameters.AddWithValue("CNPJ", textCnpj.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("EMPRESA", textEmpresa.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("OBSERVACAO", textObs.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("NF", Nf.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("DATA_EMISSAO", Convert.ToDateTime(dtNF.Text));
+                    cmd.Parameters.AddWithValue("VALOR_NF", valNF.Text.ToUpper());
+                    cmd.Parameters.AddWithValue("TRANSPORTADORA", textTransportadora.Text.ToUpper());
 
 
 
@@ -154,12 +173,15 @@ namespace EntradaNF
                 dtNF.Enabled = true;
                 Nf.Enabled = true;
                 valNF.Enabled = true;
+
             }
             else
             {
                 dtNF.Enabled = false;
                 Nf.Enabled = false;
                 valNF.Enabled = false;
+
+
 
             }
         }
@@ -173,13 +195,13 @@ namespace EntradaNF
                 {
                     cn.Open();
 
-                    var sqlQuery = "SELECT NOME FROM FORNECEDORES WHERE CNPJ = @CNPJ";
+                    var sqlQuery = "SELECT NOME FROM ViewNFFornecedores where RAZAO = @CNPJ";
 
                     SqlCommand cmd = new SqlCommand(sqlQuery, cn);
                     cmd.Parameters.AddWithValue("@CNPJ", textCnpj.Text);
                     SqlDataReader da = cmd.ExecuteReader();
 
-                   
+
 
                     if (da.HasRows)
                     {
@@ -195,17 +217,43 @@ namespace EntradaNF
                     cn.Close();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 textEmpresa.Text = textCnpj.Text;
             }
 
-            
+
+        }
+
+        private void getPorteiro()
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(Conn.StrCon))
+                {
+                    cn.Open();
+
+                    var sqlQuery = "SELECT NOME FROM TabPorteiros";
+
+                    SqlCommand cmd = new SqlCommand(sqlQuery, cn);
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand= cmd;
+                    DataTable porteiros = new DataTable();
+                    da.Fill(porteiros);
+                    cboxPorteiro.DataSource= porteiros;
+                    cboxPorteiro.ValueMember = "NOME";
+                    cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao consultar porteiros \n\n" + ex.Message);
+            }
         }
 
         private void chkLastEntry_CheckedChanged(object sender, EventArgs e)
         {
-           
+
             if (chkLastEntry.Checked == true)
             {
                 try
@@ -214,7 +262,7 @@ namespace EntradaNF
                     {
                         cn.Open();
 
-                        var sqlQuery = "SELECT  TOP 1 * FROM NFENTRADA2 ORDER BY ID DESC";
+                        var sqlQuery = "SELECT  TOP 1 * FROM TabEntradaNF ORDER BY ID DESC";
 
                         SqlCommand cmd = new SqlCommand(sqlQuery, cn);
                         cmd.Parameters.AddWithValue("@CNPJ", textCnpj.Text);
@@ -229,22 +277,27 @@ namespace EntradaNF
                             textRG.Text = da["RG"].ToString();
                             textPlaca.Text = da["PLACA"].ToString();
                             textMotivo.Text = da["MOTIVO"].ToString();
-                            textPorteiro.Text = da["PORTEIRO"].ToString();
+                            cboxPorteiro.Text = da["PORTEIRO"].ToString();
                             textDestino.Text = da["DESTINO"].ToString();
                             dtSaida.Value = Convert.ToDateTime(da["SAIDA"]);
                             textObs.Text = da["OBSERVACAO"].ToString();
+                            textTransportadora.Text = da["TRANSPORTADORA"].ToString();
+                            textCnpj.Text = da["CNPJ"].ToString();
                         }
 
                         cn.Close();
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
 
                 }
 
             }
         }
+
+       
     }
-    
+
+
 }
